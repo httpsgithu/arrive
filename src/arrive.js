@@ -1,4 +1,4 @@
-/*globals jQuery,Window,HTMLElement,HTMLDocument,HTMLCollection,NodeList,MutationObserver */
+/*globals jQuery,Window,HTMLElement,HTMLDocument,HTMLCollection,NodeList,MutationObserver,SVGElement */
 /*exported Arrive*/
 /*jshint latedef:false */
 
@@ -21,12 +21,12 @@ var Arrive = (function(window, $, undefined) {
   var arriveUniqueId = 0;
 
   var utils = (function() {
-    var matches = HTMLElement.prototype.matches || HTMLElement.prototype.webkitMatchesSelector || HTMLElement.prototype.mozMatchesSelector
+    var matches = Element.prototype.matches || HTMLElement.prototype.webkitMatchesSelector || HTMLElement.prototype.mozMatchesSelector
                   || HTMLElement.prototype.msMatchesSelector;
 
     return {
       matchesSelector: function(elem, selector) {
-        return elem instanceof HTMLElement && matches.call(elem, selector);
+        return elem instanceof Element && matches.call(elem, selector);
       },
       // to enable function overloading - By John Resig (MIT Licensed)
       addMethod: function (object, name, fn) {
@@ -492,6 +492,7 @@ var Arrive = (function(window, $, undefined) {
     exposeApi($.fn);
   }
   exposeApi(HTMLElement.prototype);
+  exposeApi(SVGElement.prototype);
   exposeApi(NodeList.prototype);
   exposeApi(HTMLCollection.prototype);
   exposeApi(HTMLDocument.prototype);
